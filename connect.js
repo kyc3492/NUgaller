@@ -23,12 +23,15 @@ async function dbSelection(){
       if(err) throw err;
       result = records;
       console.log(records);
+      console.log("Rows of query: " + records.length);
   });
 
   dbconn.end(function(err) {
       console.log('Connection Finished');
   });
 }
+
+dbSelection();
 
 module.exports = {
   dbSelection,

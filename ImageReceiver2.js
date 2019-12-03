@@ -7,6 +7,7 @@ var mysql  = require('mysql');
 var Keys = require('./private_keys.js');
 var analyzer = require('./ImageAnalyzerModule.js');
 var dbConnection = require('./connect.js');
+var notificator = require('./fcmNotificator.js')
 //var resultRenderer = require('./resultRenderer.js');
 
 var dbconn = mysql.createConnection({
@@ -94,7 +95,17 @@ app.post('/' ,function(req, res){
       dbconn.query(insertQuery, function(err, records){
         if(err) throw err;
         console.log("Requested Table is Generated!");
-      })
+        var selectQuery = "SELECT * FROM NUtellerRequested";
+        dbconn.query(selectQuery, function(err, records){
+          if(records.length > 0){
+            notificator.sendSuccessNotification();
+            console.log('Query sent.');
+          } else {
+            notificator.sendFailNotification();
+            console.log('Nothing in query.');
+          }
+        });
+      });
     });
   }
   res.json(response);
