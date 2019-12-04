@@ -2,7 +2,7 @@ var admin = require('firebase-admin');
 var serviceAccount = require('./NUGUproject-FCMkey.json');
 var private = require('./private_keys');
 // This registration token comes from the client FCM SDKs.
-var registrationToken = private.ycn8;
+var registrationToken = private.jhs8;
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
@@ -49,7 +49,7 @@ function sendFailNotification(){
     });
 }
 
-
+sendSuccessNotification();
 
 module.exports={
   sendSuccessNotification,
