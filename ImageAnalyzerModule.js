@@ -77,17 +77,17 @@ async function detectWeb(fileDir, fileName, datetime) {
 
 async function insertQuery(fileName, datetime){
 
-  var query = "INSERT INTO NUtellerData ";
-  query += "VALUES ('" + fileName + "', " + datetime +", '";
+  var query = 'INSERT INTO NUtellerData(fileName, fileSavedDatetime, labels)';
+  query += 'VALUES ("' + fileName + '", ' + datetime +', "';
 
   keywords.forEach(function(keyword){
-      if(keyword != ""){
-        query += "" + keyword + ", ";
+      if(keyword != ''){
+        query += '' + keyword + ', ';
         console.log(keyword);
       }
   });
   query = query.slice(0, -1);
-  query += "')";
+  query += '")';
 
   console.log(query);
   dbconn.query(query, function(err, records){

@@ -18,11 +18,12 @@ let response =
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.post('/' ,function(req, res){
-  console.log(req.body.action.parameters.TAG.value);
-
+  //console.log(req.body.action.parameters.TAG.value);
+  console.log(req.body.action.parameters);
+  console.log(req.body.action.actionName);
   res.json(response);
 });
 
-app.listen(9999, function(){
-  console.log('Connected, 9999 port!');
+app.listen(3000, function(){
+  console.log('Connected, 3000 port!');
 });
