@@ -135,8 +135,9 @@ app.post('/' ,function(req, res){
     var response = '{ "version": "2.0", "resultCode": "OK", "output": {}}';
     var updateQuery = "UPDATE NUtellerData SET album = 'selfie' WHERE labels LIKE UPPER('%myselfie%')";
     dbconn.query(updateQuery, function(err, records){
-      console.log('Album Created!');
+      //console.log('Album Created!');
       res.json(JSON.parse(response));
+      notificator.sendMoveSuccessNotification();
     });
   } else if(req.body.action.actionName == "photo_of_the_date") {
     console.log("Finding photos of that day");

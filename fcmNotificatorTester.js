@@ -2,7 +2,7 @@ var admin = require('firebase-admin');
 var serviceAccount = require('./NUGUproject-FCMkey.json');
 var private = require('./private_keys');
 // This registration token comes from the client FCM SDKs.
-var registrationToken = private.ycn8;
+var registrationToken = private.jhs8;
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
@@ -40,6 +40,15 @@ var albumExistsMessage = {
     },
     token: registrationToken
 };
+
+var moveSuccessMessage = {
+  data: {
+    title: '요청하신 사진들을 앨범으로 옮겼어요!',
+    body: '만든 앨범 구경하러 가실래요?',
+    request: 'MoveActivity'
+  },
+  token: registrationToken
+}
 
 function sendSuccessNotification(){
   // Send a message to the device corresponding to the provided
@@ -87,11 +96,23 @@ function sendAlreadyExistNotification(){
     });
 }
 
+function sendMoveSuccessNotification(){
+  admin.messaging().send(moveSuccessMessage).then((response) => {
+      // Response is a message ID string.
+      console.log('Successfully sent message:', response);
+    })
+    .catch((error) => {
+      console.log('Error sending message:', error);
+    });
+}
+
+//sendMoveSuccessNotification();
 sendSuccessNotification();
 
 module.exports={
   sendSuccessNotification,
   sendFailNotification,
   sendCreatedNotification,
-  sendAlreadyExistNotification
+  sendAlreadyExistNotification,
+  sendMoveSuccessNotification
 }

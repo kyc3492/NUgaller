@@ -41,6 +41,15 @@ var albumExistsMessage = {
     token: registrationToken
 };
 
+var moveSuccessMessage = {
+  data: {
+    title: '요청하신 사진들을 앨범으로 옮겼어요!',
+    body: '만든 앨범 구경하러 가실래요?',
+    request: 'MoveActivity'
+  },
+  token: registrationToken
+}
+
 function sendSuccessNotification(){
   // Send a message to the device corresponding to the provided
   // registration token.
@@ -87,10 +96,21 @@ function sendAlreadyExistNotification(){
     });
 }
 
+function sendMoveSuccessNotification(){
+  admin.messaging().send(moveSuccessMessage).then((response) => {
+      // Response is a message ID string.
+      console.log('Successfully sent message:', response);
+    })
+    .catch((error) => {
+      console.log('Error sending message:', error);
+    });
+}
+
 
 module.exports={
   sendSuccessNotification,
   sendFailNotification,
   sendCreatedNotification,
-  sendAlreadyExistNotification
+  sendAlreadyExistNotification,
+  sendMoveSuccessNotification
 }
