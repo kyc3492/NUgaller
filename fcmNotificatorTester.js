@@ -10,8 +10,8 @@ admin.initializeApp({
 
 var successMessage = {
     data: {
-      title: '누구가 사진을 찾았습니다!',
-      body: '어떤 사진을 찾아왔을지 보러가요! ^o^/',
+      title: '알림 보낸다',
+      body: '받아라 얍! ^o^/',
       request: 'FindActivity'
     },
     token: registrationToken
@@ -106,8 +106,8 @@ function sendMoveSuccessNotification(){
     });
 }
 
-//sendMoveSuccessNotification();
-sendSuccessNotification();
+sendMoveSuccessNotification();
+//sendSuccessNotification();
 
 module.exports={
   sendSuccessNotification,
